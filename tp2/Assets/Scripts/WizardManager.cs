@@ -6,7 +6,6 @@ public class WizardManager : MonoBehaviour
 {
     public enum WizardStateToSwitch { Normal, Intrepid, RunAway, Hide, Secured }
 
-
     [SerializeField] private GameObject[] enemyTowers;
 
     private SpriteRenderer sprite;
@@ -29,7 +28,7 @@ public class WizardManager : MonoBehaviour
         
     }
 
-    public Transform GetRandomActiveTower()
+    public Transform GetRandomActiveEnemyTower()
     {
         List<GameObject> temp = new();
 
@@ -42,5 +41,22 @@ public class WizardManager : MonoBehaviour
             return temp[Random.Range(0, temp.Count)].transform;
         }
         return null;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log(collision);
+        if(collision.gameObject.tag == "Forest")
+        {
+            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 0.65f);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Forest")
+        {
+            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 1f);
+        }
     }
 }

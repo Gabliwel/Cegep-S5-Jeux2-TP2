@@ -7,23 +7,24 @@ public class WizardStateNormal : WizardState
     void Start()
     {
         speed = 2f;
-        towerPosition = manager.GetRandomActiveTower();
+        targetTransform = manager.GetRandomActiveEnemyTower();
+        targetIsTower = true;
     }
 
     public override void MoveWizard()
     {
-        if (towerPosition != null && !isAttacking)
-            transform.position = Vector3.MoveTowards(transform.position, towerPosition.position, speed * Time.deltaTime);
+        if (targetTransform != null && !isAttacking)
+            transform.position = Vector3.MoveTowards(transform.position, targetTransform.position, speed * Time.deltaTime);
     }
 
     public override void ManageStateChange()
     {
-        if (!isAttacking && Vector2.Distance(transform.position, towerPosition.position) < range)
-            isAttacking = true;
+        //if (Vector2.Distance(transform.position, target.position) < range)
+        isAttacking = Vector2.Distance(transform.position, targetTransform.position) < range;
 
         if(isAttacking && canShoot)
         {
-            lineController.DrawLine(transform, towerPosition);
+            lineController.DrawLine(transform, targetTransform);
             HasShot();
         }
     }

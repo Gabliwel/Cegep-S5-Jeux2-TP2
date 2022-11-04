@@ -6,8 +6,11 @@ using UnityEngine;
 public abstract class WizardState : MonoBehaviour
 {
     protected WizardManager manager;
-    protected Transform towerPosition;
     protected LineController lineController;
+
+    protected GameObject target;
+    protected Transform targetTransform;
+    protected bool targetIsTower;
 
     protected const float range = 1.8f;
     protected bool isAttacking = false;
@@ -48,4 +51,21 @@ public abstract class WizardState : MonoBehaviour
 
     public abstract void MoveWizard();
     public abstract void ManageStateChange();
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!enabled) return;
+
+        if(targetIsTower && collision.gameObject.tag.EndsWith("Wizard") && gameObject.tag != collision.gameObject.tag)
+        {
+            targetIsTower = false;
+            targetTransform = collision.gameObject.transform;
+            target = collision.gameObject;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        
+    }
 }
