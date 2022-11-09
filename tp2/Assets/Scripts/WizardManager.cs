@@ -8,6 +8,7 @@ public class WizardManager : MonoBehaviour
 
 
     [SerializeField] private GameObject[] enemyTowers;
+    public string enemyTowerTag;
 
     private SpriteRenderer sprite;
     private WizardState state;
@@ -16,6 +17,7 @@ public class WizardManager : MonoBehaviour
     {
         sprite = GetComponent<SpriteRenderer>();
         state = GetComponent<WizardState>();
+        enemyTowers = GameObject.FindGameObjectsWithTag(enemyTowerTag);
     }
 
     
