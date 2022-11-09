@@ -9,6 +9,8 @@ TagManager:
   - BlueTower
   - GreenTower
   - Forest
+  - BlueAttack
+  - GreenAttack
   layers:
   - Default
   - TransparentFX
