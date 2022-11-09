@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - BlueWizard
+  - GreenWizard
+  - BlueTower
+  - GreenTower
+  - Forest
+  - BlueAttack
+  - GreenAttack
   layers:
   - Default
   - TransparentFX
