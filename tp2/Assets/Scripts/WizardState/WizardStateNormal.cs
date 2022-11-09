@@ -7,24 +7,55 @@ public class WizardStateNormal : WizardState
     void Start()
     {
         speed = 2f;
-        towerPosition = manager.GetRandomActiveTower();
+        regen = 5;
     }
 
     public override void MoveWizard()
     {
-        if (towerPosition != null && !isAttacking)
-            transform.position = Vector3.MoveTowards(transform.position, towerPosition.position, speed * Time.deltaTime);
+        if (target != null && !isAttacking)
+        {
+            if(manager.IsInBush())
+            {
+                transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime * WizardManager.bushReduction);
+            }
+            else
+            {
+                transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+            }
+        }
+    }
+
+    public override void Attack()
+    {
+        if (!isAttacking)
+            isAttacking = Vector2.Distance(transform.position, target.transform.position) < range;
+
+        if (isAttacking && canShoot)
+        {
+            manager.Attack(transform, target);
+            HasShot();
+        }
     }
 
     public override void ManageStateChange()
     {
-        if (!isAttacking && Vector2.Distance(transform.position, towerPosition.position) < range)
-            isAttacking = true;
-
-        if(isAttacking && canShoot)
+        if(manager.getNbLives() < WizardManager.maxNbLives / 4)
         {
-            lineController.DrawLine(transform, towerPosition);
-            HasShot();
+            manager.ChangeState(WizardManager.WizardStateToSwitch.RunAway);
+        }
+    }
+
+    public override void Regenerate()
+    {
+        if (!isAttacking && manager.getNbLives() < WizardManager.maxNbLives)
+        {
+            regenCadenceTimer += Time.deltaTime;
+            if (regenCadenceTimer >= regenCadance)
+                canShoot = true;
+        }
+        else
+        {
+            regenCadenceTimer = 0;
         }
     }
 }
