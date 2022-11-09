@@ -7,6 +7,7 @@ public class WizardManager : MonoBehaviour
     public enum WizardStateToSwitch { Normal, Intrepid, RunAway, Hide, Secured }
 
     [SerializeField] private GameObject[] enemyTowers;
+    public string enemyTowerTag;
 
     private SpriteRenderer sprite;
     private WizardState state;
@@ -23,6 +24,7 @@ public class WizardManager : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         state = GetComponent<WizardState>();
         lineController = GetComponentInChildren<LineController>();
+        enemyTowers = GameObject.FindGameObjectsWithTag(enemyTowerTag);
     }
 
     public void ChangeState(WizardStateToSwitch newState)
