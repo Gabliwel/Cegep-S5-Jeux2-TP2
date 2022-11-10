@@ -27,9 +27,9 @@ public class SpawnManager : MonoBehaviour
 
     void manageSpawn()
     {
-        int randomSpawner = Random.Range(1, towers.Length);
         if (currentTimer >= spawnInterval)
         {
+            int randomSpawner = Random.Range(1, towers.Length);
             for (int i = 0; i < maxWizards; i++)
             {
                 if (!wizards[i].activeSelf)

@@ -162,6 +162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!120 &149527679
 LineRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -255,10 +256,13 @@ LineRenderer:
     numCapVertices: 0
     alignment: 0
     textureMode: 0
+    textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
+  m_MaskInteraction: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+  m_ApplyActiveColorSpace: 0
 --- !u!4 &149527680
 Transform:
   m_ObjectHideFlags: 0
@@ -326,6 +330,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 780694260}
     m_Modifications:
     - target: {fileID: 2140100992868446960, guid: 31c5333f3f05bba4da7c53b1e895a9f8, type: 3}
@@ -385,6 +390,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 31c5333f3f05bba4da7c53b1e895a9f8, type: 3}
 --- !u!4 &168683988 stripped
 Transform:
@@ -429,6 +435,67 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6174110742750610700, guid: 012482a81130bd844950eb1886f6def4, type: 3}
   m_PrefabInstance: {fileID: 1004260169}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &339755521
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 339755523}
+  - component: {fileID: 339755522}
+  - component: {fileID: 339755524}
+  m_Layer: 0
+  m_Name: BlueWizardTeamManager
+  m_TagString: BlueTeam
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &339755522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339755521}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f440519af2a1124eaf99fda1790c2d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wizard: {fileID: 0}
+  towerTag: BlueTower
+--- !u!4 &339755523
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339755521}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &339755524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339755521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21e62ee4c4fc71746a350d211f1aa493, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teamTowerTag: BlueTower
+  enemyTowerTag: GreenTower
 --- !u!1 &348052039 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3892282733907421024, guid: 7df758a551c245843abaeb161531b65f, type: 3}
@@ -444,6 +511,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 900164450}
     m_Modifications:
     - target: {fileID: 3892282733907420958, guid: 7df758a551c245843abaeb161531b65f, type: 3}
@@ -499,6 +567,7 @@ PrefabInstance:
       value: Forest
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 7df758a551c245843abaeb161531b65f, type: 3}
 --- !u!4 &452377711 stripped
 Transform:
@@ -620,6 +689,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 900164450}
     m_Modifications:
     - target: {fileID: 3892282733907420958, guid: 7df758a551c245843abaeb161531b65f, type: 3}
@@ -675,6 +745,7 @@ PrefabInstance:
       value: Forest
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 7df758a551c245843abaeb161531b65f, type: 3}
 --- !u!4 &607348276 stripped
 Transform:
@@ -766,8 +837,8 @@ GameObject:
   - component: {fileID: 939811711}
   - component: {fileID: 939811710}
   - component: {fileID: 939811713}
-  - component: {fileID: 939811712}
   - component: {fileID: 939811716}
+  - component: {fileID: 939811712}
   - component: {fileID: 939811715}
   - component: {fileID: 939811714}
   m_Layer: 0
@@ -843,7 +914,7 @@ Transform:
   m_Children:
   - {fileID: 149527680}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &939811712
 CircleCollider2D:
@@ -906,10 +977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 267be74f274dc4e458e64b4b26225a32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyTowers:
-  - {fileID: 1080106025}
-  - {fileID: 1903402436}
-  - {fileID: 394447042}
+  teamManagerTag: GreenTeam
 --- !u!58 &939811716
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -962,6 +1030,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 1090893346}
     m_Modifications:
     - target: {fileID: 2756459548415440801, guid: 012482a81130bd844950eb1886f6def4, type: 3}
@@ -1021,17 +1090,56 @@ PrefabInstance:
       value: GreenTower
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 012482a81130bd844950eb1886f6def4, type: 3}
 --- !u!4 &975775332 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2756459548415440801, guid: 012482a81130bd844950eb1886f6def4, type: 3}
   m_PrefabInstance: {fileID: 975775331}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &975775334
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 778968535}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!70 &975775335
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 778968535}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1.05, y: 1.38}
+  m_Direction: 0
 --- !u!1001 &1004260169
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 1090893346}
     m_Modifications:
     - target: {fileID: 2756459548415440801, guid: 012482a81130bd844950eb1886f6def4, type: 3}
@@ -1091,12 +1199,50 @@ PrefabInstance:
       value: GreenTower
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 012482a81130bd844950eb1886f6def4, type: 3}
 --- !u!4 &1004260170 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2756459548415440801, guid: 012482a81130bd844950eb1886f6def4, type: 3}
   m_PrefabInstance: {fileID: 1004260169}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &1004260172
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218443395}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!70 &1004260173
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218443395}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1.05, y: 1.38}
+  m_Direction: 0
 --- !u!1 &1041447309
 GameObject:
   m_ObjectHideFlags: 0
@@ -1192,10 +1338,11 @@ GameObject:
   - component: {fileID: 1045318130}
   - component: {fileID: 1045318129}
   - component: {fileID: 1045318134}
-  - component: {fileID: 1045318132}
-  - component: {fileID: 1045318131}
   - component: {fileID: 1045318133}
   - component: {fileID: 1045318135}
+  - component: {fileID: 1045318132}
+  - component: {fileID: 1045318136}
+  - component: {fileID: 1045318131}
   m_Layer: 0
   m_Name: WizardBlue
   m_TagString: BlueWizard
@@ -1263,13 +1410,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1045318128}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.55, y: 1.86, z: 0}
+  m_LocalPosition: {x: 0.29, y: 1.85, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2094830243}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1045318131
 MonoBehaviour:
@@ -1278,7 +1425,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1045318128}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eeed7771168fb9741aa6f14a9c16edde, type: 3}
   m_Name: 
@@ -1295,10 +1442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 267be74f274dc4e458e64b4b26225a32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyTowers:
-  - {fileID: 778968535}
-  - {fileID: 218443395}
-  - {fileID: 1609990793}
+  teamManagerTag: BlueTeam
 --- !u!58 &1045318133
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -1352,6 +1496,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.25
+--- !u!114 &1045318136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045318128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7bae22edb0058e46832b0ee29e7175b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1080106025 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2140100992868446960, guid: 31c5333f3f05bba4da7c53b1e895a9f8, type: 3}
@@ -1401,6 +1557,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 780694260}
     m_Modifications:
     - target: {fileID: 2140100992868446960, guid: 31c5333f3f05bba4da7c53b1e895a9f8, type: 3}
@@ -1460,17 +1617,56 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 31c5333f3f05bba4da7c53b1e895a9f8, type: 3}
 --- !u!4 &1497522518 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2140100992868446963, guid: 31c5333f3f05bba4da7c53b1e895a9f8, type: 3}
   m_PrefabInstance: {fileID: 1497522517}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &1497522520
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394447042}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!70 &1497522521
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394447042}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1.05, y: 1.38}
+  m_Direction: 0
 --- !u!1001 &1521812607
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 1090893346}
     m_Modifications:
     - target: {fileID: 2756459548415440801, guid: 012482a81130bd844950eb1886f6def4, type: 3}
@@ -1530,22 +1726,122 @@ PrefabInstance:
       value: GreenTower
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 012482a81130bd844950eb1886f6def4, type: 3}
 --- !u!4 &1521812608 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2756459548415440801, guid: 012482a81130bd844950eb1886f6def4, type: 3}
   m_PrefabInstance: {fileID: 1521812607}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1563079621
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1563079623}
+  - component: {fileID: 1563079622}
+  - component: {fileID: 1563079624}
+  m_Layer: 0
+  m_Name: GreenWizardTeamManager
+  m_TagString: GreenTeam
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1563079622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563079621}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f440519af2a1124eaf99fda1790c2d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wizard: {fileID: 0}
+  towerTag: GreenTower
+--- !u!4 &1563079623
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563079621}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1563079624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563079621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21e62ee4c4fc71746a350d211f1aa493, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teamTowerTag: GreenTower
+  enemyTowerTag: BlueTower
 --- !u!1 &1609990793 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6174110742750610700, guid: 012482a81130bd844950eb1886f6def4, type: 3}
   m_PrefabInstance: {fileID: 1521812607}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &1609990795
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609990793}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!70 &1609990796
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1609990793}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1.05, y: 1.38}
+  m_Direction: 0
 --- !u!1001 &1880528893
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 900164450}
     m_Modifications:
     - target: {fileID: 3892282733907420958, guid: 7df758a551c245843abaeb161531b65f, type: 3}
@@ -1601,6 +1897,7 @@ PrefabInstance:
       value: Forest
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 7df758a551c245843abaeb161531b65f, type: 3}
 --- !u!4 &1880528894 stripped
 Transform:
@@ -1638,11 +1935,49 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2140100992868446960, guid: 31c5333f3f05bba4da7c53b1e895a9f8, type: 3}
   m_PrefabInstance: {fileID: 168683987}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &1903402438
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903402436}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!70 &1903402439
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903402436}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1.05, y: 1.38}
+  m_Direction: 0
 --- !u!1001 &1964934180
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 900164450}
     m_Modifications:
     - target: {fileID: 3892282733907420958, guid: 7df758a551c245843abaeb161531b65f, type: 3}
@@ -1698,6 +2033,7 @@ PrefabInstance:
       value: Forest
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 7df758a551c245843abaeb161531b65f, type: 3}
 --- !u!4 &1964934181 stripped
 Transform:
@@ -1735,6 +2071,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 2
     m_TransformParent: {fileID: 780694260}
     m_Modifications:
     - target: {fileID: 2140100992868446960, guid: 31c5333f3f05bba4da7c53b1e895a9f8, type: 3}
@@ -1794,12 +2131,50 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 31c5333f3f05bba4da7c53b1e895a9f8, type: 3}
 --- !u!4 &2003312428 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2140100992868446963, guid: 31c5333f3f05bba4da7c53b1e895a9f8, type: 3}
   m_PrefabInstance: {fileID: 2003312427}
   m_PrefabAsset: {fileID: 0}
+--- !u!50 &2003312430
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080106025}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 1
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!70 &2003312431
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080106025}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1.05, y: 1.38}
+  m_Direction: 0
 --- !u!1 &2094830242
 GameObject:
   m_ObjectHideFlags: 0
@@ -1837,6 +2212,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!120 &2094830244
 LineRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1930,10 +2306,13 @@ LineRenderer:
     numCapVertices: 0
     alignment: 0
     textureMode: 0
+    textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
+  m_MaskInteraction: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+  m_ApplyActiveColorSpace: 0
 --- !u!114 &2094830245
 MonoBehaviour:
   m_ObjectHideFlags: 0
