@@ -6,25 +6,28 @@ public class WizardManager : MonoBehaviour
 {
     public enum WizardStateToSwitch { Normal, Intrepid, RunAway, Hide, Secured }
 
-    [SerializeField] private GameObject[] enemyTowers;
-    public string enemyTowerTag;
-
     private SpriteRenderer sprite;
     private WizardState state;
     private LineController lineController;
+    private WizardTeamManager teamManager;
+
+    protected List<GameObject> possibleTargets = new();
+    protected List<GameObject> possibleHiddingSpot = new();
 
     private float nbLives = 100f;
-    private bool isInBush = false;
+    private GameObject bush = null;
 
     public const float bushReduction = 0.75f;
     public const float maxNbLives = 100f;
+
+    [SerializeField] private string teamManagerTag;
 
     private void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
         state = GetComponent<WizardState>();
         lineController = GetComponentInChildren<LineController>();
-        enemyTowers = GameObject.FindGameObjectsWithTag(enemyTowerTag);
+        teamManager = GameObject.FindGameObjectWithTag(teamManagerTag).GetComponent<WizardTeamManager>();
     }
 
     public void ChangeState(WizardStateToSwitch newState)
@@ -61,32 +64,26 @@ public class WizardManager : MonoBehaviour
         state.enabled = true;
     }
 
+    //**************** Team Manager *************************//
 
     public GameObject GetRandomActiveEnemyTower()
     {
-        List<GameObject> temp = new();
-
-        foreach(GameObject tower in enemyTowers)
-            if(tower.activeSelf)
-                temp.Add(tower);
-
-        if(temp.Count > 0)
-        {
-            return temp[Random.Range(0, temp.Count)];
-        }
-        return null;
+        return teamManager.GetRandomActiveTeamTower();
     }
 
-    public void Attack(Transform from, GameObject target)
+    public GameObject GetClosestTower()
     {
-        lineController.DrawLine(from, target);
+        return teamManager.GetClosestActiveTeamTower(gameObject);
     }
+
+
+    //**************** Collision *************************//
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Forest")
         {
-            isInBush = true;
+            bush = collision.gameObject;
             sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 0.65f);
         }
     }
@@ -95,14 +92,73 @@ public class WizardManager : MonoBehaviour
     {
         if (collision.gameObject.tag == "Forest")
         {
-            isInBush = false;
+            bush = null;
             sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 1f);
         }
     }
 
+    //****************** Trigger ******************************//
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag.EndsWith("Wizard") && gameObject.tag != collision.gameObject.tag && !collision.isTrigger)
+        {
+            possibleTargets.Add(collision.gameObject);
+
+            state.ManageEnemyEnter(collision.gameObject);
+
+            /*if (target.tag.EndsWith("Tower"))
+            {
+                target = collision.gameObject;
+            }*/
+        }
+        else if (collision.gameObject.tag == "Forest" && !collision.isTrigger)
+        {
+            possibleHiddingSpot.Add(collision.gameObject);
+            state.ManageHidingSpotEnter(collision.gameObject);
+            Debug.Log(state);
+            Debug.Log("ouiiui");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag.EndsWith("Wizard") && gameObject.tag != collision.gameObject.tag && !collision.isTrigger)
+        {
+            possibleTargets.Remove(collision.gameObject);
+
+            state.ManageEnemyExit(collision.gameObject);
+
+            /*if (collision.gameObject == target)
+            {
+                isAttacking = false;
+                SearchNewTarget();
+            }*/
+        }
+        else if (collision.gameObject.tag == "Forest" && !collision.isTrigger)
+        {
+            possibleHiddingSpot.Remove(collision.gameObject);
+        }
+    }
+
+    //********************* Basic *********************//
+
     public bool IsInBush()
     {
-        return isInBush;
+        return bush != null;
+    }
+
+    public GameObject GetBush()
+    {
+        return bush;
+    }
+
+    public List<GameObject> GetPossibleTargets()
+    {
+        return possibleTargets;
+    }
+    public List<GameObject> GetPossibleHidingSpots()
+    {
+        return possibleTargets;
     }
 
     public float getNbLives()
@@ -112,6 +168,7 @@ public class WizardManager : MonoBehaviour
 
     public void AddRegenLives(float value)
     {
+        Debug.Log(gameObject.name + " regen");
         nbLives += value;
         if(nbLives > maxNbLives)
         {
@@ -121,7 +178,7 @@ public class WizardManager : MonoBehaviour
 
     public bool Damage(float attackValue)
     {
-        if (isInBush)
+        if (IsInBush())
         {
             nbLives -= attackValue * bushReduction;
         }
@@ -131,5 +188,10 @@ public class WizardManager : MonoBehaviour
         }
 
         return (nbLives <= 0);
+    }
+
+    public void Attack(Transform from, GameObject target)
+    {
+        lineController.DrawLine(from, target);
     }
 }
