@@ -155,11 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 267be74f274dc4e458e64b4b26225a32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyTowers:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  enemyTowerTag: BlueTower
+  teamManagerTag: GreenTeam
 --- !u!114 &1121185284909554046
 MonoBehaviour:
   m_ObjectHideFlags: 0
