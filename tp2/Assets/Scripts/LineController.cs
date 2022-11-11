@@ -47,14 +47,26 @@ public class LineController : MonoBehaviour
             timer += Time.deltaTime;
             if(timer >= activeTime)
             {
-                timer = 0f;
-                line.ResetBounds();
-                line.enabled = false;
-                collider.enabled = false;
-                target = null;
+                Deactivate();
             }
         }
     }
+
+    private void OnDisable()
+    {
+        Deactivate();
+    }
+
+    private void Deactivate()
+    {
+        timer = 0f;
+        line.ResetBounds();
+        line.enabled = false;
+        collider.enabled = false;
+        target = null;
+    }
+
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log(collision);

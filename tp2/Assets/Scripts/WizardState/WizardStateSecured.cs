@@ -28,4 +28,20 @@ public class WizardStateSecured : WizardState
     {
         throw new System.NotImplementedException();
     }
+
+    // Reaction
+    public override void ManageEnemyEnter(GameObject gameObject)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void ManageEnemyExit(GameObject gameObject)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void ManageHidingSpotEnter(GameObject gameObject)
+    {
+        throw new System.NotImplementedException();
+    }
 }

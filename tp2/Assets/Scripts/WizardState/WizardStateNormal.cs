@@ -6,8 +6,9 @@ public class WizardStateNormal : WizardState
 {
     void Start()
     {
+        target = manager.GetRandomActiveEnemyTower();
         speed = 2f;
-        regen = 5;
+        regen = normalRegen;
     }
 
     public override void MoveWizard()
@@ -27,10 +28,9 @@ public class WizardStateNormal : WizardState
 
     public override void Attack()
     {
-        if (!target.activeSelf)
-        {
+        if (target == null || !target.activeSelf)
             SearchNewTarget();
-        }
+
         isAttacking = Vector2.Distance(transform.position, target.transform.position) < range;
 
         if (isAttacking && canShoot)
@@ -54,11 +54,36 @@ public class WizardStateNormal : WizardState
         {
             regenCadenceTimer += Time.deltaTime;
             if (regenCadenceTimer >= regenCadance)
-                canShoot = true;
+            {
+                regenCadenceTimer = 0;
+                manager.AddRegenLives(regen);
+            }
         }
         else
         {
             regenCadenceTimer = 0;
         }
+    }
+
+    // Reaction
+    public override void ManageEnemyEnter(GameObject enemy)
+    {
+        if (target == null || target.tag.EndsWith("Tower"))
+        {
+            target = enemy.gameObject;
+        }
+    }
+
+    public override void ManageEnemyExit(GameObject enemy)
+    {
+        if (target == null || enemy.gameObject == target)
+        {
+            isAttacking = false;
+            SearchNewTarget();
+        }
+    }
+
+    public override void ManageHidingSpotEnter(GameObject gameObject)
+    {
     }
 }
