@@ -46,63 +46,69 @@ public class WizardStateRunAway : WizardState
             (towerTransformX > transform.position.x && spot.transform.position.x > transform.position.x))
                 target = spot;
         }*/
-}
+    }
 
-public override void Attack()
-{
-}
+    public override void Attack()
+    {
+    }
 
-public override void ManageStateChange()
-{
-if(isHiding)
-{
-    if(target.tag == "Forest")
+    public override void ManageStateChange()
+    {
+        if(isHiding)
+        {
+            if(target.tag == "Forest")
+            {
+                manager.ChangeState(WizardManager.WizardStateToSwitch.Hide);
+            }
+            else if(target.tag.EndsWith("Tower"))
+            {
+                manager.ChangeState(WizardManager.WizardStateToSwitch.Secured);
+            }
+        }
+    }
+
+    public override void MoveWizard()
+    {
+        if(!isHiding && target != null)
+        {
+            if (manager.IsInBush())
+            {
+                transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime * WizardManager.bushReduction);
+            }
+            else
+            {
+                transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+            }
+
+            if (target.transform.position == transform.position)
+                isHiding = true;
+        }
+    }
+
+    public override void Regenerate()
     {
 
     }
-    else if(target.tag.EndsWith("Tower"))
+
+    // Reaction
+    public override void ManageEnemyEnter(GameObject gameObject)
     {
-
     }
-}
-}
 
-public override void MoveWizard()
-{
-if(!isHiding && target != null)
-{
-    if (manager.IsInBush())
+    public override void ManageEnemyExit(GameObject gameObject)
     {
-        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime * WizardManager.bushReduction);
     }
-    else
+
+    public override void ManageHidingSpotEnter(GameObject spot)
     {
-        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+        if (isHiding)
+            return;
+
+        if (Vector2.Distance(spot.transform.position, transform.position) < Vector2.Distance(target.transform.position, transform.position))
+        {
+            if((towerTransformX < transform.position.x && spot.transform.position.x < transform.position.x) ||
+            (towerTransformX > transform.position.x && spot.transform.position.x > transform.position.x))
+                target = spot;
+        }
     }
-}
-}
-
-public override void Regenerate()
-{
-
-}
-
-// Reaction
-public override void ManageEnemyEnter(GameObject gameObject)
-{
-}
-
-public override void ManageEnemyExit(GameObject gameObject)
-{
-}
-
-public override void ManageHidingSpotEnter(GameObject spot)
-{
-if (Vector2.Distance(spot.transform.position, transform.position) < Vector2.Distance(target.transform.position, transform.position))
-{
-    if((towerTransformX < transform.position.x && spot.transform.position.x < transform.position.x) ||
-    (towerTransformX > transform.position.x && spot.transform.position.x > transform.position.x))
-        target = spot;
-}
-}
 }

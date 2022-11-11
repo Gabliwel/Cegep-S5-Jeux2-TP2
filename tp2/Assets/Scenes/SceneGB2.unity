@@ -840,6 +840,7 @@ GameObject:
   - component: {fileID: 939811716}
   - component: {fileID: 939811712}
   - component: {fileID: 939811715}
+  - component: {fileID: 939811717}
   - component: {fileID: 939811714}
   m_Layer: 0
   m_Name: WizardGreen
@@ -908,7 +909,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 939811709}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.43, y: 1.79, z: 0}
+  m_LocalPosition: {x: -1.49, y: 0.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -994,6 +995,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.75
+--- !u!114 &939811717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 939811709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7bae22edb0058e46832b0ee29e7175b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &958151705 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3892282733907421024, guid: 7df758a551c245843abaeb161531b65f, type: 3}
@@ -1410,7 +1423,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1045318128}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.29, y: 1.85, z: 0}
+  m_LocalPosition: {x: -3.04, y: -0.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
