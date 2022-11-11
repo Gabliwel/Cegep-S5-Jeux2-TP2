@@ -37,6 +37,7 @@ public class LineController : MonoBehaviour
 
         collider.transform.position = to.transform.position;
         collider.enabled = true;
+        Debug.Log(to.tag);
     }
 
     void Update()
@@ -68,6 +69,11 @@ public class LineController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log(collision);
+        if (target == null)
+        {
+            return;
+        }
         //Valide donc les collisions meme si des enemies sont collé
         if (collision.gameObject == target)
         {
@@ -81,6 +87,16 @@ public class LineController : MonoBehaviour
                     target = null;
                 }
             }
+            else if(target.tag.EndsWith("Tower")){
+                bool isDead = target.GetComponent<TowerManager>().Damage(attackValue);
+
+                if (isDead)
+                {
+                    target.SetActive(false);
+                    target = null;
+                }
+            }
         }
+        
     }
 }
