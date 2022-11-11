@@ -34,17 +34,25 @@ public class SpawnManager : MonoBehaviour
             {
                 if (!wizards[i].activeSelf)
                 {
-                    if (towers[randomSpawner].activeSelf)
+                    List<GameObject> temp = new();
+
+                    foreach (GameObject tower in towers)
+                        if (tower.activeSelf)
+                            temp.Add(tower);
+
+                    if (temp.Count > 0)
                     {
                         wizards[i].transform.position = towers[randomSpawner].transform.position;
                         wizards[i].SetActive(true);
                         currentTimer = 0;
+                        break;
                     }
-                    break;
+
                 }
             }
         }
 
+        
         currentTimer += Time.deltaTime;
     }
 

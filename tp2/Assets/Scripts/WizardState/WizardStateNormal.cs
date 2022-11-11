@@ -27,8 +27,11 @@ public class WizardStateNormal : WizardState
 
     public override void Attack()
     {
-        if (!isAttacking)
-            isAttacking = Vector2.Distance(transform.position, target.transform.position) < range;
+        if (!target.activeSelf)
+        {
+            SearchNewTarget();
+        }
+        isAttacking = Vector2.Distance(transform.position, target.transform.position) < range;
 
         if (isAttacking && canShoot)
         {

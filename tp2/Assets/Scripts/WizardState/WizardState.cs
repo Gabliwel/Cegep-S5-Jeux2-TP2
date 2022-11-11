@@ -93,7 +93,7 @@ public abstract class WizardState : MonoBehaviour
         }
     }
 
-    private void SearchNewTarget()
+    public void SearchNewTarget()
     {
         if(possibleTargets.Count <= 0)
         {
