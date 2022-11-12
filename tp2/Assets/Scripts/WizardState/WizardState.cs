@@ -31,13 +31,16 @@ public abstract class WizardState : MonoBehaviour
     void Update()
     {
         MoveWizard();
+
+        CheckCanShoot();
         Attack();
+
         ManageStateChange();
         Regenerate();
-        CheckCanShoot();
     }
 
     // Boucle
+    public abstract void Init();
     public abstract void MoveWizard();
     public abstract void Attack();
     public abstract void ManageStateChange();
@@ -56,10 +59,12 @@ public abstract class WizardState : MonoBehaviour
     public abstract void ManageEnemyEnter(GameObject gameObject);
     public abstract void ManageEnemyExit(GameObject gameObject);
     public abstract void ManageHidingSpotEnter(GameObject gameObject);
+    public abstract void ManageIsAttackBy(GameObject gameObject);
 
     // Autre
     public void SearchNewTarget()
     {
+        Debug.Log("searchiiiiiiiiiiiiing");
         if (manager.GetPossibleTargets().Count <= 0)
         {
             target = manager.GetRandomActiveEnemyTower();

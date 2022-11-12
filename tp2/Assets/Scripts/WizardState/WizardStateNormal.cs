@@ -6,9 +6,14 @@ public class WizardStateNormal : WizardState
 {
     void Start()
     {
-        target = manager.GetRandomActiveEnemyTower();
+        Init();
         speed = 2f;
         regen = normalRegen;
+    }
+
+    public override void Init()
+    {
+        target = manager.GetRandomActiveEnemyTower();
     }
 
     public override void MoveWizard()
@@ -29,7 +34,11 @@ public class WizardStateNormal : WizardState
     public override void Attack()
     {
         if (target == null || !target.activeSelf)
+        {
             SearchNewTarget();
+            isAttacking = false;
+            Debug.Log("aaaaaaaaaaaaaaaaaaaaaaa");
+        }
 
         isAttacking = Vector2.Distance(transform.position, target.transform.position) < range;
 
@@ -45,6 +54,10 @@ public class WizardStateNormal : WizardState
         if(manager.getNbLives() < WizardManager.maxNbLives / 4)
         {
             manager.ChangeState(WizardManager.WizardStateToSwitch.RunAway);
+        } 
+        else if(manager.GetNbKill() >= 3)
+        {
+            manager.ChangeState(WizardManager.WizardStateToSwitch.Intrepid);
         }
     }
 
@@ -85,5 +98,11 @@ public class WizardStateNormal : WizardState
 
     public override void ManageHidingSpotEnter(GameObject gameObject)
     {
+        //Doesnt interact with hiding spot
+    }
+
+    public override void ManageIsAttackBy(GameObject gameObject)
+    {
+        //Doesnt interact with new attack
     }
 }

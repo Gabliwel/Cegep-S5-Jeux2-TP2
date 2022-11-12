@@ -32,25 +32,33 @@ public class WizardTeamManager : MonoBehaviour
 
     public GameObject GetClosestActiveTeamTower(GameObject wizard)
     {
+        return ReturnClosestToPosition(wizard, towers);
+    }
+
+    public GameObject GetClosestActiveEnemyTower(GameObject wizard)
+    {
+        return ReturnClosestToPosition(wizard, enemyTowers);
+    }
+
+    private GameObject ReturnClosestToPosition(GameObject wizard, GameObject[] towers)
+    {
         GameObject closestTour = null;
         float smallerDistance = Mathf.Infinity;
 
         foreach (GameObject possibleTarget in towers)
         {
-            float distance = Vector2.Distance(wizard.transform.position, possibleTarget.transform.position);
-
-            if (distance < smallerDistance)
+            if (possibleTarget.activeSelf)
             {
-                smallerDistance = distance;
-                closestTour = possibleTarget;
+                float distance = Vector2.Distance(wizard.transform.position, possibleTarget.transform.position);
+
+                if (distance < smallerDistance)
+                {
+                    smallerDistance = distance;
+                    closestTour = possibleTarget;
+                }
             }
         }
 
         return closestTour;
-    }
-
-    public void GetClosestActiveEnemyTower()
-    {
-
     }
 }

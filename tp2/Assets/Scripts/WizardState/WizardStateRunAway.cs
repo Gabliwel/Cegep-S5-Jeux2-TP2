@@ -10,11 +10,16 @@ public class WizardStateRunAway : WizardState
 
     void Start()
     {
+        Init();
         isHiding = false;
         regen = normalRegen;
         regenCadenceTimer = 0f;
         speed = 3f;
+    }
 
+    public override void Init()
+    {
+        isHiding = false;
         GameObject closestTower = manager.GetClosestTower();
         towerTransformX = closestTower.transform.position.x;
         if (!manager.IsInBush())
@@ -36,16 +41,26 @@ public class WizardStateRunAway : WizardState
         }
     }
 
-    private void PickClosestPoint(List<GameObject> possibleSpot)
+    private void PickClosestPoint(List<GameObject> possibleSpots)
     {
-        //a faire
-        /*
-         * if (Vector2.Distance(spot.transform.position, transform.position) < Vector2.Distance(target.transform.position, transform.position))
+        GameObject closestSpot = null;
+        float smallerDistance = Mathf.Infinity;
+
+        foreach (GameObject possibleSpot in possibleSpots)
         {
-            if((towerTransformX < transform.position.x && spot.transform.position.x < transform.position.x) ||
-            (towerTransformX > transform.position.x && spot.transform.position.x > transform.position.x))
-                target = spot;
-        }*/
+            if ((towerTransformX < transform.position.x && possibleSpot.transform.position.x < transform.position.x) ||
+                (towerTransformX > transform.position.x && possibleSpot.transform.position.x > transform.position.x))
+            {
+                float distance = Vector2.Distance(transform.position, possibleSpot.transform.position);
+
+                if (distance < smallerDistance)
+                {
+                    smallerDistance = distance;
+                    closestSpot = possibleSpot;
+                }
+            }
+        }
+        target = closestSpot;
     }
 
     public override void Attack()
@@ -87,16 +102,18 @@ public class WizardStateRunAway : WizardState
 
     public override void Regenerate()
     {
-
+        //Doesnt regenerate
     }
 
     // Reaction
     public override void ManageEnemyEnter(GameObject gameObject)
     {
+        //Doesnt interact with ennemy
     }
 
     public override void ManageEnemyExit(GameObject gameObject)
     {
+        //Doesnt interact with ennemy
     }
 
     public override void ManageHidingSpotEnter(GameObject spot)
@@ -110,5 +127,10 @@ public class WizardStateRunAway : WizardState
             (towerTransformX > transform.position.x && spot.transform.position.x > transform.position.x))
                 target = spot;
         }
+    }
+
+    public override void ManageIsAttackBy(GameObject gameObject)
+    {
+        //Doesnt interact with new attack
     }
 }

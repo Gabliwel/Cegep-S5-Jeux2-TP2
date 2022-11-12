@@ -6,42 +6,87 @@ public class WizardStateIntrepid : WizardState
 {
     void Start()
     {
+        speed = 2.5f;
+        regen = normalRegen;
+    }
 
+    public override void Init()
+    {
+        target = manager.GetClosestEnemyTower();
     }
 
     public override void Attack()
     {
-        throw new System.NotImplementedException();
+        if (target == null || !target.activeSelf)
+            target = manager.GetClosestEnemyTower();
+
+        isAttacking = Vector2.Distance(transform.position, target.transform.position) < range;
+
+        if (isAttacking && canShoot)
+        {
+            manager.Attack(transform, target);
+            HasShot();
+        }
     }
 
     public override void ManageStateChange()
     {
-        throw new System.NotImplementedException();
+        //pas de changement de state quand intrepid
     }
 
     public override void MoveWizard()
     {
-        throw new System.NotImplementedException();
+        if (target != null && !isAttacking)
+        {
+            if (manager.IsInBush())
+            {
+                transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime * WizardManager.bushReduction);
+            }
+            else
+            {
+                transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+            }
+        }
     }
 
     public override void Regenerate()
     {
-        throw new System.NotImplementedException();
+        if (manager.getNbLives() < WizardManager.maxNbLives)
+        {
+            regenCadenceTimer += Time.deltaTime;
+            if (regenCadenceTimer >= regenCadance)
+            {
+                regenCadenceTimer = 0;
+                manager.AddRegenLives(regen);
+            }
+        }
+        else
+        {
+            regenCadenceTimer = 0;
+        }
     }
 
     // Reaction
     public override void ManageEnemyEnter(GameObject gameObject)
     {
-        throw new System.NotImplementedException();
+        //Doesnt interact with ennemy
     }
 
     public override void ManageEnemyExit(GameObject gameObject)
     {
-        throw new System.NotImplementedException();
+        //Doesnt interact with ennemy
     }
 
     public override void ManageHidingSpotEnter(GameObject gameObject)
     {
-        throw new System.NotImplementedException();
+        //Doesnt interact with new hiding spot
+    }
+
+    public override void ManageIsAttackBy(GameObject gameObject)
+    {
+        if(target.gameObject.tag.EndsWith("Tower"))
+        {
+            target = gameObject;
+        }
     }
 }

@@ -6,10 +6,11 @@ public class LineController : MonoBehaviour
 {
     private LineRenderer line;
     private Collider2D collider;
+    private WizardManager wizard;
  
     private const float activeTime = 0.2f;
     private float timer = 0f;
-    private const float attackValue = 20;
+    private const float attackValue = 10;
 
     private GameObject target;
 
@@ -17,6 +18,7 @@ public class LineController : MonoBehaviour
     {
         line = GetComponent<LineRenderer>();
         collider = GetComponent<BoxCollider2D>();
+        wizard = GetComponentInParent<WizardManager>();
     }
 
     private void Start()
@@ -37,7 +39,6 @@ public class LineController : MonoBehaviour
 
         collider.transform.position = to.transform.position;
         collider.enabled = true;
-        Debug.Log(to.tag);
     }
 
     void Update()
@@ -69,7 +70,6 @@ public class LineController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision);
         if (target == null)
         {
             return;
@@ -79,12 +79,13 @@ public class LineController : MonoBehaviour
         {
             if(target.tag.EndsWith("Wizard"))
             {
-                bool isDead = target.GetComponent<WizardManager>().Damage(attackValue);
+                bool isDead = target.GetComponent<WizardManager>().Damage(attackValue, transform.parent.gameObject);
 
                 if(isDead)
                 {
                     target.SetActive(false);
                     target = null;
+                    wizard.AddKill();
                 }
             }
             else if(target.tag.EndsWith("Tower")){
