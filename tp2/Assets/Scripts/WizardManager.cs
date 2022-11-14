@@ -14,7 +14,7 @@ public class WizardManager : MonoBehaviour
     protected List<GameObject> possibleTargets = new();
     protected List<GameObject> possibleHiddingSpot = new();
 
-    private float nbLives = 100f;
+    [SerializeField] private float nbLives = 100f;
     private GameObject bush = null;
 
     public const float bushReduction = 0.75f;

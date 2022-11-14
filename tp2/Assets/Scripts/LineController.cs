@@ -9,7 +9,7 @@ public class LineController : MonoBehaviour
  
     private const float activeTime = 0.2f;
     private float timer = 0f;
-    private const float attackValue = 20;
+    private const float attackValue = 8;
 
     private GameObject target;
 

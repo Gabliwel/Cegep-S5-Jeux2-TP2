@@ -4,44 +4,86 @@ using UnityEngine;
 
 public class WizardStateHide : WizardState
 {
+    private bool isHiding;
+    private int exitBushFightingHpLimit = 65;
+    private int hiddenHealthRegenRatio = 2;
     void Start()
     {
-
+        isHiding = true;
+        regen = normalRegen;
+        regenCadenceTimer = 0f;
+        speed = 0f;
     }
 
     public override void Attack()
     {
-        throw new System.NotImplementedException();
+        if (target == null || !target.activeSelf)
+            SearchNewTarget();
+
+        isAttacking = Vector2.Distance(transform.position, target.transform.position) < range;
+
+        if (isAttacking && canShoot)
+        {
+            manager.Attack(transform, target);
+            HasShot();
+        }
     }
 
     public override void ManageStateChange()
     {
-        throw new System.NotImplementedException();
+        if (manager.getNbLives() > exitBushFightingHpLimit && isAttacking)
+        {
+            manager.ChangeState(WizardManager.WizardStateToSwitch.Normal);
+        }
+        else if(manager.getNbLives() > WizardManager.maxNbLives)
+        {
+            manager.ChangeState(WizardManager.WizardStateToSwitch.Normal);
+        }
     }
 
     public override void MoveWizard()
     {
-        throw new System.NotImplementedException();
+        // Hidden wizards do not move.
     }
 
     public override void Regenerate()
     {
-        throw new System.NotImplementedException();
+        regenCadenceTimer += Time.deltaTime;
+        if (!isAttacking && manager.getNbLives() < WizardManager.maxNbLives)
+        {
+            
+            if (regenCadenceTimer >= regenCadance)
+            {
+                regenCadenceTimer = 0;
+                manager.AddRegenLives(hiddenHealthRegenRatio * regen);
+            }
+        }
+        else if(manager.getNbLives() < WizardManager.maxNbLives)
+        {
+            regenCadenceTimer = 0;
+            manager.AddRegenLives(regen);
+        }
     }
 
     // Reaction
-    public override void ManageEnemyEnter(GameObject gameObject)
+    public override void ManageEnemyEnter(GameObject enemy)
     {
-        throw new System.NotImplementedException();
+        if (target == null || target.tag.EndsWith("Tower"))
+        {
+            target = enemy.gameObject;
+        }
     }
 
-    public override void ManageEnemyExit(GameObject gameObject)
+    public override void ManageEnemyExit(GameObject enemy)
     {
-        throw new System.NotImplementedException();
+        if (target == null || enemy.gameObject == target)
+        {
+            isAttacking = false;
+            SearchNewTarget();
+        }
     }
 
     public override void ManageHidingSpotEnter(GameObject gameObject)
     {
-        throw new System.NotImplementedException();
     }
 }
