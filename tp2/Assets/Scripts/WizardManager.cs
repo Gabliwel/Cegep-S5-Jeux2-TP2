@@ -17,10 +17,16 @@ public class WizardManager : MonoBehaviour
     [SerializeField] private float nbLives = 100f;
     private GameObject bush = null;
 
+    private int nbKill = 0;
+
     public const float bushReduction = 0.75f;
-    public const float maxNbLives = 100f;
+
+    [SerializeField ]public const float maxNbLives = 100f;
 
     [SerializeField] private string teamManagerTag;
+
+    private MeshRenderer textMesh;
+    private TextMesh text;
 
     private void Awake()
     {
@@ -28,6 +34,17 @@ public class WizardManager : MonoBehaviour
         state = GetComponent<WizardState>();
         lineController = GetComponentInChildren<LineController>();
         teamManager = GameObject.FindGameObjectWithTag(teamManagerTag).GetComponent<WizardTeamManager>();
+
+        nbLives = maxNbLives;
+    }
+
+    private void Start()
+    {
+        textMesh = GetComponentInChildren<MeshRenderer>();
+        text = GetComponentInChildren<TextMesh>();
+        Debug.Log(text);
+        textMesh.sortingOrder = 5;
+        text.text = "Normal";
     }
 
     public void ChangeState(WizardStateToSwitch newState)
@@ -38,30 +55,44 @@ public class WizardManager : MonoBehaviour
             case WizardStateToSwitch.Normal:
                 {
                     //state = gameObject.GetComponent<WizardStateNormal>();
+                    text.text = "Normal";
                     break;
                 }
             case WizardStateToSwitch.RunAway:
                 {
-                    //state = gameObject.GetComponent<WizardStateRunAway>();
+                    state = gameObject.GetComponent<WizardStateRunAway>();
+                    Debug.Log(text);
+                    text.text = "RunAway";
                     break;
                 }
             case WizardStateToSwitch.Hide:
                 {
                     //state = gameObject.GetComponent<WizardStateHide>();
+                    text.text = "Hide";
                     break;
                 }
             case WizardStateToSwitch.Intrepid:
                 {
                     //state = gameObject.GetComponent<WizardStateIntrepid>();
+                    text.text = "Intrepid";
                     break;
                 }
             case WizardStateToSwitch.Secured:
                 {
                     //state = gameObject.GetComponent<WizardStateSecured>();
+                    text.text = "Secured";
                     break;
                 }
         }
         state.enabled = true;
+        state.Init();
+    }
+
+    public void Init()
+    {
+        nbLives = maxNbLives;
+        nbKill = 0;
+        ChangeState(WizardStateToSwitch.Normal);
     }
 
     //**************** Team Manager *************************//
@@ -69,6 +100,11 @@ public class WizardManager : MonoBehaviour
     public GameObject GetRandomActiveEnemyTower()
     {
         return teamManager.GetRandomActiveTeamTower();
+    }
+
+    public GameObject GetClosestEnemyTower()
+    {
+        return teamManager.GetClosestActiveEnemyTower(gameObject);
     }
 
     public GameObject GetClosestTower()
@@ -115,8 +151,6 @@ public class WizardManager : MonoBehaviour
         {
             possibleHiddingSpot.Add(collision.gameObject);
             state.ManageHidingSpotEnter(collision.gameObject);
-            Debug.Log(state);
-            Debug.Log("ouiiui");
         }
     }
 
@@ -152,13 +186,23 @@ public class WizardManager : MonoBehaviour
         return bush;
     }
 
+    public int GetNbKill()
+    {
+        return nbKill;
+    }
+
+    public void AddKill()
+    {
+        nbKill++;
+    }
+
     public List<GameObject> GetPossibleTargets()
     {
         return possibleTargets;
     }
     public List<GameObject> GetPossibleHidingSpots()
     {
-        return possibleTargets;
+        return possibleHiddingSpot;
     }
 
     public float getNbLives()
@@ -176,7 +220,7 @@ public class WizardManager : MonoBehaviour
         }
     }
 
-    public bool Damage(float attackValue)
+    public bool Damage(float attackValue, GameObject from)
     {
         if (IsInBush())
         {
@@ -187,6 +231,7 @@ public class WizardManager : MonoBehaviour
             nbLives -= attackValue;
         }
 
+        state.ManageIsAttackBy(from);
         return (nbLives <= 0);
     }
 
@@ -194,4 +239,5 @@ public class WizardManager : MonoBehaviour
     {
         lineController.DrawLine(from, target);
     }
+
 }

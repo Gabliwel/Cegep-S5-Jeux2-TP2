@@ -9,6 +9,11 @@ public class WizardStateSecured : WizardState
 
     }
 
+    public override void Init()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override void Attack()
     {
         throw new System.NotImplementedException();
@@ -41,6 +46,11 @@ public class WizardStateSecured : WizardState
     }
 
     public override void ManageHidingSpotEnter(GameObject gameObject)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void ManageIsAttackBy(GameObject gameObject)
     {
         throw new System.NotImplementedException();
     }

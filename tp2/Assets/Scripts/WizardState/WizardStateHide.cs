@@ -15,6 +15,11 @@ public class WizardStateHide : WizardState
         speed = 0f;
     }
 
+    public override void Init()
+    {
+        throw new System.NotImplementedException();
+    }
+
     public override void Attack()
     {
         if (target == null || !target.activeSelf)
@@ -85,5 +90,10 @@ public class WizardStateHide : WizardState
 
     public override void ManageHidingSpotEnter(GameObject gameObject)
     {
+    }
+
+    public override void ManageIsAttackBy(GameObject gameObject)
+    {
+        throw new System.NotImplementedException();
     }
 }
