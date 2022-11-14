@@ -44,6 +44,7 @@ public class SpawnManager : MonoBehaviour
                     {
                         wizards[i].transform.position = towers[randomSpawner].transform.position;
                         wizards[i].SetActive(true);
+                        wizards[i].GetComponent<WizardTeamManager>();
                         currentTimer = 0;
                         break;
                     }
