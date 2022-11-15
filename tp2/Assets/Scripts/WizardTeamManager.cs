@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WizardTeamManager : MonoBehaviour
 {
@@ -8,11 +9,23 @@ public class WizardTeamManager : MonoBehaviour
     private GameObject[] enemyTowers;
     [SerializeField] private string teamTowerTag;
     [SerializeField] private string enemyTowerTag;
+    [SerializeField] private Text endGameText;
+    private string teamNameSuffix = "Tower";
+    static public bool gameOver = false;
 
     private void Awake()
     {
         towers = GameObject.FindGameObjectsWithTag(teamTowerTag);
         enemyTowers = GameObject.FindGameObjectsWithTag(enemyTowerTag);
+    }
+
+    private void Update()
+    {
+        if (!gameOver)
+        {
+            gameOver = VerifyVictoryConditions();
+        }
+        
     }
 
     public GameObject GetRandomActiveTeamTower()
@@ -60,5 +73,37 @@ public class WizardTeamManager : MonoBehaviour
         }
 
         return closestTour;
+    }
+
+    // This is the kind of behavior that should usually stand in a GameManager, but as stands, it would be slightly overkill to create one JUST for this.
+    private bool VerifyVictoryConditions()
+    {
+        
+
+        bool enemyVanquished = true;
+        foreach (GameObject tower in enemyTowers)
+            if (tower.activeSelf)
+            {
+                enemyVanquished = false;
+                break;
+            }
+                
+
+        if (enemyVanquished)
+        {
+            string formattedTeamName = teamTowerTag;
+            formattedTeamName = formattedTeamName.Remove(formattedTeamName.Length - teamNameSuffix.Length).ToUpper();
+            endGameText.text = formattedTeamName + " TEAM IS VICTORIOUS";
+            if(formattedTeamName == "BLUE")
+            {
+                endGameText.color = Color.blue;
+            }
+            else
+            {
+                endGameText.color = Color.green;
+            }
+            
+        }
+        return enemyVanquished;
     }
 }

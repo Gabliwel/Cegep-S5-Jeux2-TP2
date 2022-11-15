@@ -16,9 +16,9 @@ public abstract class WizardState : MonoBehaviour
     protected float regen;
     protected const float regenCadance = 1;
     protected float regenCadenceTimer = 0;
-    public const float normalRegen = 5f;
+    public const float normalRegen = 3f;
 
-    private const float cadenceShoot = 0.75f;
+    private const float cadenceShoot = 0.25f;
     private float cadenceTimerShoot = 0;
     protected bool canShoot = true;
     protected bool alerted = false;

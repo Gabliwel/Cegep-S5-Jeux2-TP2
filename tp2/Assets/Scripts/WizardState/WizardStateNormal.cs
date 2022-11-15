@@ -7,7 +7,7 @@ public class WizardStateNormal : WizardState
     void Start()
     {
         Init();
-        speed = 2f;
+        speed = 1f;
         regen = normalRegen;
     }
 
@@ -37,7 +37,15 @@ public class WizardStateNormal : WizardState
         {
             SearchNewTarget();
             isAttacking = false;
-            Debug.Log("aaaaaaaaaaaaaaaaaaaaaaa");
+            
+        }
+        else if (target.tag.EndsWith("Wizard"))
+        {
+            if(target.GetComponent<WizardManager>().GetWizardState() == WizardManager.WizardStateToSwitch.Secured)
+            {
+                SearchNewTarget();
+                isAttacking = false;
+            }
         }
 
         isAttacking = Vector2.Distance(transform.position, target.transform.position) < range;

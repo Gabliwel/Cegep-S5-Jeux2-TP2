@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class WizardManager : MonoBehaviour
 {
-    public enum WizardStateToSwitch { Normal, Intrepid, RunAway, Hide, Secured }
+    public enum WizardStateToSwitch { Normal, Intrepid, RunAway, Hide, Secured, Inert }
 
     private SpriteRenderer sprite;
     private WizardState state;
     private LineController lineController;
     private WizardTeamManager teamManager;
+    private WizardStateToSwitch currentState;
 
     protected List<GameObject> possibleTargets = new();
     protected List<GameObject> possibleHiddingSpot = new();
@@ -21,7 +22,7 @@ public class WizardManager : MonoBehaviour
 
     public const float bushReduction = 0.75f;
 
-    [SerializeField] public const float maxNbLives = 100f;
+    public const float maxNbLives = 100f;
 
     [SerializeField] private string teamManagerTag;
 
@@ -34,7 +35,7 @@ public class WizardManager : MonoBehaviour
         state = GetComponent<WizardState>();
         lineController = GetComponentInChildren<LineController>();
         teamManager = GameObject.FindGameObjectWithTag(teamManagerTag).GetComponent<WizardTeamManager>();
-
+        currentState = WizardStateToSwitch.Normal;
         nbLives = 100;
     }
 
@@ -47,6 +48,14 @@ public class WizardManager : MonoBehaviour
         //text.text = "Normal";
     }
 
+    private void Update()
+    {
+        if (WizardTeamManager.gameOver)
+        {
+            GameOver();
+        }
+    }
+
     public void ChangeState(WizardStateToSwitch newState)
     {
         state.enabled = false;
@@ -56,6 +65,7 @@ public class WizardManager : MonoBehaviour
                 {
                     state = gameObject.GetComponent<WizardStateNormal>();
                     //text.text = "Normal";
+                    currentState = WizardStateToSwitch.Normal;
                     break;
                 }
             case WizardStateToSwitch.RunAway:
@@ -63,24 +73,35 @@ public class WizardManager : MonoBehaviour
                     state = gameObject.GetComponent<WizardStateRunAway>();
                     //Debug.Log(text);
                     //text.text = "RunAway";
+                    currentState = WizardStateToSwitch.RunAway;
                     break;
                 }
             case WizardStateToSwitch.Hide:
                 {
                     state = gameObject.GetComponent<WizardStateHide>();
                     //text.text = "Hide";
+                    currentState = WizardStateToSwitch.Hide;
                     break;
                 }
             case WizardStateToSwitch.Intrepid:
                 {
                     state = gameObject.GetComponent<WizardStateIntrepid>();
                     //text.text = "Intrepid";
+                    currentState = WizardStateToSwitch.Intrepid;
                     break;
                 }
             case WizardStateToSwitch.Secured:
                 {
                     state = gameObject.GetComponent<WizardStateSecured>();
                     //text.text = "Secured";
+                    currentState = WizardStateToSwitch.Secured;
+                    break;
+                }
+            case WizardStateToSwitch.Inert:
+                {
+                    state = gameObject.GetComponent<WizardStateSecured>();
+                    //text.text = "Inert";
+                    currentState = WizardStateToSwitch.Secured;
                     break;
                 }
         }
@@ -93,6 +114,11 @@ public class WizardManager : MonoBehaviour
         nbLives = 100;
         nbKill = 0;
         ChangeState(WizardStateToSwitch.Normal);
+    }
+
+    public void GameOver()
+    {
+        ChangeState(WizardStateToSwitch.Inert);
     }
 
     //**************** Team Manager *************************//
@@ -238,6 +264,11 @@ public class WizardManager : MonoBehaviour
     public void Attack(Transform from, GameObject target)
     {
         lineController.DrawLine(from, target);
+    }
+
+    public WizardStateToSwitch GetWizardState()
+    {
+        return currentState;
     }
 
 }

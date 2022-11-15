@@ -6,7 +6,7 @@ public class WizardStateIntrepid : WizardState
 {
     void Start()
     {
-        speed = 2.5f;
+        speed = 1.5f;
         regen = normalRegen;
     }
 

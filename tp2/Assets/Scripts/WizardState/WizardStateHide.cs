@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class WizardStateHide : WizardState
 {
-    private bool isHiding;
+
     private int exitBushFightingHpLimit = 65;
     private int hiddenHealthRegenRatio = 2;
     void Start()
     {
-        isHiding = true;
+        
         regen = normalRegen;
         regenCadenceTimer = 0f;
         speed = 0f;
@@ -48,9 +48,9 @@ public class WizardStateHide : WizardState
         if (manager.getNbLives() > exitBushFightingHpLimit && isAttacking)
         {
             manager.ChangeState(WizardManager.WizardStateToSwitch.Normal);
-            manager.Init();
+            target = manager.GetRandomActiveEnemyTower();
         }
-        else if(manager.getNbLives() > WizardManager.maxNbLives)
+        else if(manager.getNbLives() >= WizardManager.maxNbLives)
         {
             manager.ChangeState(WizardManager.WizardStateToSwitch.Normal);
         }

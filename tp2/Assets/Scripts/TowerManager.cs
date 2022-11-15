@@ -5,7 +5,7 @@ using UnityEngine;
 public class TowerManager : MonoBehaviour
 {
     [SerializeField] private float healthRemaining;
-    private float startingHealth = 18f;
+    private float startingHealth = 100f;
     private GameObject[] bunkeredWizards;
     
     void Start()

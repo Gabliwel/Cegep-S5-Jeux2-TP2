@@ -14,7 +14,7 @@ public class WizardStateRunAway : WizardState
         isHiding = false;
         regen = normalRegen;
         regenCadenceTimer = 0f;
-        speed = 3f;
+        speed = 2f;
     }
 
     public override void Init()
