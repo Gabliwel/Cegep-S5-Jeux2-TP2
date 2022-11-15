@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WizardStateSecured : WizardState
 {
+    private int bunkeredHealthRegenRatio = 3;
     void Start()
     {
 
@@ -11,47 +12,83 @@ public class WizardStateSecured : WizardState
 
     public override void Init()
     {
-        throw new System.NotImplementedException();
+        // A wizard does not spawn as secured
     }
 
     public override void Attack()
     {
-        throw new System.NotImplementedException();
+        //A bunkered opponent does not attack
     }
 
     public override void ManageStateChange()
     {
-        throw new System.NotImplementedException();
+        if (manager.getNbLives() >= WizardManager.maxNbLives)
+        {
+            Debug.Log("Un-Bunkered");
+            manager.ChangeState(WizardManager.WizardStateToSwitch.Normal);
+        }
+        else if (alerted)
+        {
+            alerted = false;
+            //manager.ChangeState(WizardManager.WizardStateToSwitch.LastStand);
+        }
     }
 
     public override void MoveWizard()
     {
-        throw new System.NotImplementedException();
+        //A bunkered opponent does not move.
     }
 
     public override void Regenerate()
     {
-        throw new System.NotImplementedException();
+        regenCadenceTimer += Time.deltaTime;
+        if (manager.getNbLives() < WizardManager.maxNbLives)
+        {
+
+            if (regenCadenceTimer >= regenCadance)
+            {
+                regenCadenceTimer = 0;
+                manager.AddRegenLives(bunkeredHealthRegenRatio * regen);
+            }
+        }
+        else
+        {
+            regenCadenceTimer = 0;
+        }
     }
 
     // Reaction
-    public override void ManageEnemyEnter(GameObject gameObject)
+    public override void ManageEnemyEnter(GameObject enemy)
     {
-        throw new System.NotImplementedException();
+        // Despite not attacking, keep tracks of current targets as it will get out at some point
+        if (target == null || target.tag.EndsWith("Tower"))
+        {
+            target = enemy.gameObject;
+        }
     }
 
-    public override void ManageEnemyExit(GameObject gameObject)
+    public override void ManageEnemyExit(GameObject enemy)
     {
-        throw new System.NotImplementedException();
+        // Despite not attacking, keep tracks of current targets as it will get out at some point
+        if (target == null || enemy.gameObject == target)
+        {
+            isAttacking = false;
+            SearchNewTarget();
+        }
     }
 
     public override void ManageHidingSpotEnter(GameObject gameObject)
     {
-        throw new System.NotImplementedException();
+        // Already hidden
     }
 
     public override void ManageIsAttackBy(GameObject gameObject)
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
+    }
+
+    public void Alert()
+    {
+        alerted = true;
     }
 }

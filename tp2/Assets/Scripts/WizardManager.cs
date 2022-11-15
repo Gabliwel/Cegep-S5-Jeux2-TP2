@@ -21,7 +21,7 @@ public class WizardManager : MonoBehaviour
 
     public const float bushReduction = 0.75f;
 
-    [SerializeField ]public const float maxNbLives = 100f;
+    [SerializeField] public const float maxNbLives = 100f;
 
     [SerializeField] private string teamManagerTag;
 
@@ -35,16 +35,16 @@ public class WizardManager : MonoBehaviour
         lineController = GetComponentInChildren<LineController>();
         teamManager = GameObject.FindGameObjectWithTag(teamManagerTag).GetComponent<WizardTeamManager>();
 
-        nbLives = maxNbLives;
+        nbLives = 100;
     }
 
     private void Start()
     {
-        textMesh = GetComponentInChildren<MeshRenderer>();
-        text = GetComponentInChildren<TextMesh>();
-        Debug.Log(text);
-        textMesh.sortingOrder = 5;
-        text.text = "Normal";
+        //textMesh = GetComponentInChildren<MeshRenderer>();
+        //text = GetComponentInChildren<TextMesh>();
+        //Debug.Log(text);
+        //textMesh.sortingOrder = 5;
+        //text.text = "Normal";
     }
 
     public void ChangeState(WizardStateToSwitch newState)
@@ -54,33 +54,33 @@ public class WizardManager : MonoBehaviour
         {
             case WizardStateToSwitch.Normal:
                 {
-                    //state = gameObject.GetComponent<WizardStateNormal>();
-                    text.text = "Normal";
+                    state = gameObject.GetComponent<WizardStateNormal>();
+                    //text.text = "Normal";
                     break;
                 }
             case WizardStateToSwitch.RunAway:
                 {
                     state = gameObject.GetComponent<WizardStateRunAway>();
-                    Debug.Log(text);
-                    text.text = "RunAway";
+                    //Debug.Log(text);
+                    //text.text = "RunAway";
                     break;
                 }
             case WizardStateToSwitch.Hide:
                 {
-                    //state = gameObject.GetComponent<WizardStateHide>();
-                    text.text = "Hide";
+                    state = gameObject.GetComponent<WizardStateHide>();
+                    //text.text = "Hide";
                     break;
                 }
             case WizardStateToSwitch.Intrepid:
                 {
-                    //state = gameObject.GetComponent<WizardStateIntrepid>();
-                    text.text = "Intrepid";
+                    state = gameObject.GetComponent<WizardStateIntrepid>();
+                    //text.text = "Intrepid";
                     break;
                 }
             case WizardStateToSwitch.Secured:
                 {
-                    //state = gameObject.GetComponent<WizardStateSecured>();
-                    text.text = "Secured";
+                    state = gameObject.GetComponent<WizardStateSecured>();
+                    //text.text = "Secured";
                     break;
                 }
         }
@@ -90,7 +90,7 @@ public class WizardManager : MonoBehaviour
 
     public void Init()
     {
-        nbLives = maxNbLives;
+        nbLives = 100;
         nbKill = 0;
         ChangeState(WizardStateToSwitch.Normal);
     }
@@ -212,7 +212,7 @@ public class WizardManager : MonoBehaviour
 
     public void AddRegenLives(float value)
     {
-        Debug.Log(gameObject.name + " regen");
+        Debug.Log(gameObject.name + " regen" + nbLives);
         nbLives += value;
         if(nbLives > maxNbLives)
         {

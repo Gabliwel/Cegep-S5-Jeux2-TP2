@@ -17,7 +17,7 @@ public class WizardStateHide : WizardState
 
     public override void Init()
     {
-        throw new System.NotImplementedException();
+        //  A wizard does not get initialized as hidden.
     }
 
     public override void Attack()
@@ -25,7 +25,16 @@ public class WizardStateHide : WizardState
         if (target == null || !target.activeSelf)
             SearchNewTarget();
 
-        isAttacking = Vector2.Distance(transform.position, target.transform.position) < range;
+
+        if (target != null)
+        {
+            isAttacking = Vector2.Distance(transform.position, target.transform.position) < range;
+        }
+        else
+        {
+            isAttacking = false;
+        }
+            
 
         if (isAttacking && canShoot)
         {
@@ -39,6 +48,7 @@ public class WizardStateHide : WizardState
         if (manager.getNbLives() > exitBushFightingHpLimit && isAttacking)
         {
             manager.ChangeState(WizardManager.WizardStateToSwitch.Normal);
+            manager.Init();
         }
         else if(manager.getNbLives() > WizardManager.maxNbLives)
         {
@@ -90,10 +100,11 @@ public class WizardStateHide : WizardState
 
     public override void ManageHidingSpotEnter(GameObject gameObject)
     {
+        // The character is already hidden
     }
 
     public override void ManageIsAttackBy(GameObject gameObject)
     {
-        throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
 }

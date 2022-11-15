@@ -10,7 +10,7 @@ public class SpawnManager : MonoBehaviour
 
     private static int maxWizards = 50;
     private GameObject[] wizards = new GameObject[maxWizards];
-    private int spawnInterval = 5;
+    private int spawnInterval = 2;
     private float currentTimer = 0f;
     private GameObject[] towers;
 
@@ -29,7 +29,7 @@ public class SpawnManager : MonoBehaviour
     {
         if (currentTimer >= spawnInterval)
         {
-            int randomSpawner = Random.Range(1, towers.Length);
+            int randomSpawner = Random.Range(0, towers.Length);
             for (int i = 0; i < maxWizards; i++)
             {
                 if (!wizards[i].activeSelf)
@@ -44,7 +44,7 @@ public class SpawnManager : MonoBehaviour
                     {
                         wizards[i].transform.position = towers[randomSpawner].transform.position;
                         wizards[i].SetActive(true);
-                        wizards[i].GetComponent<WizardTeamManager>();
+                        wizards[i].GetComponent<WizardManager>().Init();
                         currentTimer = 0;
                         break;
                     }

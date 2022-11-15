@@ -565,6 +565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 267be74f274dc4e458e64b4b26225a32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nbLives: 100
   teamManagerTag: BlueTeam
 --- !u!58 &448544200
 CircleCollider2D:
@@ -1263,6 +1264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 267be74f274dc4e458e64b4b26225a32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nbLives: 100
   teamManagerTag: GreenTeam
 --- !u!58 &939811716
 CircleCollider2D:
@@ -1660,6 +1662,7 @@ GameObject:
   - component: {fileID: 1045318135}
   - component: {fileID: 1045318132}
   - component: {fileID: 1045318136}
+  - component: {fileID: 1045318137}
   - component: {fileID: 1045318131}
   m_Layer: 0
   m_Name: WizardBlue
@@ -1761,6 +1764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 267be74f274dc4e458e64b4b26225a32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nbLives: 100
   teamManagerTag: BlueTeam
 --- !u!58 &1045318133
 CircleCollider2D:
@@ -1825,6 +1829,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7bae22edb0058e46832b0ee29e7175b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1045318137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045318128}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b49e6bf6ffea3f47b52d6f65b33609e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1045632687

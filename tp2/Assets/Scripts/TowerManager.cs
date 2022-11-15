@@ -6,6 +6,7 @@ public class TowerManager : MonoBehaviour
 {
     [SerializeField] private float healthRemaining;
     private float startingHealth = 18f;
+    private GameObject[] bunkeredWizards;
     
     void Start()
     {
@@ -29,6 +30,14 @@ public class TowerManager : MonoBehaviour
         else
         {
             return true;
+        }
+    }
+
+    public void AlertBunkeredWizards()
+    {
+        for(int i = 0; i < bunkeredWizards.Length; i++)
+        {
+            bunkeredWizards[i].GetComponent<WizardStateSecured>().Alert();
         }
     }
 }
