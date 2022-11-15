@@ -17,6 +17,7 @@ public class WizardManager : MonoBehaviour
 
     [SerializeField] private float nbLives = 100f;
     private GameObject bush = null;
+    private GameObject tower = null;
 
     private int nbKill = 0;
 
@@ -26,9 +27,6 @@ public class WizardManager : MonoBehaviour
 
     [SerializeField] private string teamManagerTag;
 
-    private MeshRenderer textMesh;
-    private TextMesh text;
-
     private void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
@@ -37,15 +35,6 @@ public class WizardManager : MonoBehaviour
         teamManager = GameObject.FindGameObjectWithTag(teamManagerTag).GetComponent<WizardTeamManager>();
         currentState = WizardStateToSwitch.Normal;
         nbLives = 100;
-    }
-
-    private void Start()
-    {
-        //textMesh = GetComponentInChildren<MeshRenderer>();
-        //text = GetComponentInChildren<TextMesh>();
-        //Debug.Log(text);
-        //textMesh.sortingOrder = 5;
-        //text.text = "Normal";
     }
 
     private void Update()
@@ -64,44 +53,37 @@ public class WizardManager : MonoBehaviour
             case WizardStateToSwitch.Normal:
                 {
                     state = gameObject.GetComponent<WizardStateNormal>();
-                    //text.text = "Normal";
                     currentState = WizardStateToSwitch.Normal;
                     break;
                 }
             case WizardStateToSwitch.RunAway:
                 {
                     state = gameObject.GetComponent<WizardStateRunAway>();
-                    //Debug.Log(text);
-                    //text.text = "RunAway";
                     currentState = WizardStateToSwitch.RunAway;
                     break;
                 }
             case WizardStateToSwitch.Hide:
                 {
                     state = gameObject.GetComponent<WizardStateHide>();
-                    //text.text = "Hide";
                     currentState = WizardStateToSwitch.Hide;
                     break;
                 }
             case WizardStateToSwitch.Intrepid:
                 {
                     state = gameObject.GetComponent<WizardStateIntrepid>();
-                    //text.text = "Intrepid";
                     currentState = WizardStateToSwitch.Intrepid;
                     break;
                 }
             case WizardStateToSwitch.Secured:
                 {
                     state = gameObject.GetComponent<WizardStateSecured>();
-                    //text.text = "Secured";
                     currentState = WizardStateToSwitch.Secured;
                     break;
                 }
             case WizardStateToSwitch.Inert:
                 {
-                    state = gameObject.GetComponent<WizardStateSecured>();
-                    //text.text = "Inert";
-                    currentState = WizardStateToSwitch.Secured;
+                    state = gameObject.GetComponent<WizardStateInert>();
+                    currentState = WizardStateToSwitch.Inert;
                     break;
                 }
         }
@@ -143,18 +125,28 @@ public class WizardManager : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Forest")
+        if (collision.gameObject.CompareTag("Forest"))
         {
             bush = collision.gameObject;
             sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 0.65f);
+        }
+        else if (collision.gameObject.tag.EndsWith("Tower"))
+        {
+            tower = collision.gameObject;
+            sprite.color = new Color(255,255,255);
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Forest")
+        if (collision.gameObject.CompareTag("Forest"))
         {
             bush = null;
+            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 1f);
+        }
+        else if (collision.gameObject.tag.EndsWith("Tower"))
+        {
+            tower = collision.gameObject;
             sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 1f);
         }
     }
@@ -162,7 +154,7 @@ public class WizardManager : MonoBehaviour
     //****************** Trigger ******************************//
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag.EndsWith("Wizard") && gameObject.tag != collision.gameObject.tag && !collision.isTrigger)
+        if (collision.gameObject.tag.EndsWith("Wizard") && !gameObject.CompareTag(collision.gameObject.tag) && !collision.isTrigger)
         {
             possibleTargets.Add(collision.gameObject);
 
@@ -173,7 +165,7 @@ public class WizardManager : MonoBehaviour
                 target = collision.gameObject;
             }*/
         }
-        else if (collision.gameObject.tag == "Forest" && !collision.isTrigger)
+        else if (collision.gameObject.CompareTag("Forest") && !collision.isTrigger)
         {
             possibleHiddingSpot.Add(collision.gameObject);
             state.ManageHidingSpotEnter(collision.gameObject);
@@ -182,7 +174,7 @@ public class WizardManager : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag.EndsWith("Wizard") && gameObject.tag != collision.gameObject.tag && !collision.isTrigger)
+        if (collision.gameObject.tag.EndsWith("Wizard") && !gameObject.CompareTag(collision.gameObject.tag) && !collision.isTrigger)
         {
             possibleTargets.Remove(collision.gameObject);
 
@@ -194,7 +186,7 @@ public class WizardManager : MonoBehaviour
                 SearchNewTarget();
             }*/
         }
-        else if (collision.gameObject.tag == "Forest" && !collision.isTrigger)
+        else if (collision.gameObject.CompareTag("Forest") && !collision.isTrigger)
         {
             possibleHiddingSpot.Remove(collision.gameObject);
         }
@@ -206,10 +198,19 @@ public class WizardManager : MonoBehaviour
     {
         return bush != null;
     }
+    public bool IsInTower()
+    {
+        return tower != null;
+    }
 
     public GameObject GetBush()
     {
         return bush;
+    }
+
+    public GameObject GetTower()
+    {
+        return tower;
     }
 
     public int GetNbKill()
@@ -231,7 +232,7 @@ public class WizardManager : MonoBehaviour
         return possibleHiddingSpot;
     }
 
-    public float getNbLives()
+    public float GetNbLives()
     {
         return nbLives;
     }

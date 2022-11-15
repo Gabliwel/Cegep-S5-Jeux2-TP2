@@ -9,16 +9,16 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] GameObject wizard;
     [SerializeField] private string towerTag;
 
-    private static int maxWizards = 50;
-    private GameObject[] wizards = new GameObject[maxWizards];
-    private float spawnInterval = 3f;
-    private float deadMultiplier = 0.75f;
+    private const int MAX_WIZARDS = 50;
+    private GameObject[] wizards = new GameObject[MAX_WIZARDS]; 
+    private const float SPAWN_INTERVAL = 3f;
+    private const float DEAD_TOWER_ACCELERATION = 0.75f;
     private float currentTimer = 0f;
     private GameObject[] towers;
 
     void Start()
     {
-        preLoadActors();
+        PreLoadActors();
     }
 
     // Update is called once per frame
@@ -26,12 +26,12 @@ public class SpawnManager : MonoBehaviour
     {
         if (!WizardTeamManager.gameOver)
         {
-            manageSpawn();
+            ManageSpawn();
         }
         
     }
 
-    void manageSpawn()
+    void ManageSpawn()
     {
         List<GameObject> temp = new();
 
@@ -44,10 +44,10 @@ public class SpawnManager : MonoBehaviour
 
 
         //For each broken tower reduce spawn interval as a comeback factor
-        if (currentTimer >= spawnInterval - (deadMultiplier * (towers.Length - towersRemaining)))
+        if (currentTimer >= SPAWN_INTERVAL - (DEAD_TOWER_ACCELERATION * (towers.Length - towersRemaining)))
         {
             int randomSpawner = Random.Range(0, towers.Length);
-            for (int i = 0; i < maxWizards; i++)
+            for (int i = 0; i < MAX_WIZARDS; i++)
             {
                 if (!wizards[i].activeSelf)
                 {
@@ -70,9 +70,9 @@ public class SpawnManager : MonoBehaviour
         currentTimer += Time.deltaTime;
     }
 
-    void preLoadActors()
+    void PreLoadActors()
     {
-        for (int i = 0; i < maxWizards; i++)
+        for (int i = 0; i < MAX_WIZARDS; i++)
         {
             wizards[i] = Instantiate(wizard);
             wizards[i].transform.parent = gameObject.transform;

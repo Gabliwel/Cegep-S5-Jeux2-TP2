@@ -71,7 +71,7 @@ public class WizardStateRunAway : WizardState
     {
         if(isHiding)
         {
-            if(target.tag == "Forest")
+            if(target.CompareTag("Forest"))
             {
                 manager.ChangeState(WizardManager.WizardStateToSwitch.Hide);
             }

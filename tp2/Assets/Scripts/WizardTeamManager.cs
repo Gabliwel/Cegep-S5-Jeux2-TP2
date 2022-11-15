@@ -11,6 +11,8 @@ public class WizardTeamManager : MonoBehaviour
     [SerializeField] private string enemyTowerTag;
     [SerializeField] private Text endGameText;
     private string teamNameSuffix = "Tower";
+
+    // This is bad practice, but again this is to prevent creating an entire GameManager just to manage the gameover state.
     static public bool gameOver = false;
 
     private void Awake()

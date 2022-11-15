@@ -5,8 +5,7 @@ using UnityEngine;
 public class TowerManager : MonoBehaviour
 {
     [SerializeField] private float healthRemaining;
-    private float startingHealth = 100f;
-    private GameObject[] bunkeredWizards;
+    private float startingHealth = 175f;
     
     void Start()
     {
@@ -14,10 +13,6 @@ public class TowerManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public bool Damage(float attackValue)
     {
@@ -30,14 +25,6 @@ public class TowerManager : MonoBehaviour
         else
         {
             return true;
-        }
-    }
-
-    public void AlertBunkeredWizards()
-    {
-        for(int i = 0; i < bunkeredWizards.Length; i++)
-        {
-            bunkeredWizards[i].GetComponent<WizardStateSecured>().Alert();
         }
     }
 }

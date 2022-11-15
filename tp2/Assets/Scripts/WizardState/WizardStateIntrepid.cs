@@ -8,6 +8,7 @@ public class WizardStateIntrepid : WizardState
     {
         speed = 1.5f;
         regen = normalRegen;
+        cadenceShoot = 0.15f;
     }
 
     public override void Init()
@@ -51,7 +52,7 @@ public class WizardStateIntrepid : WizardState
 
     public override void Regenerate()
     {
-        if (manager.getNbLives() < WizardManager.maxNbLives)
+        if (manager.GetNbLives() < WizardManager.maxNbLives)
         {
             regenCadenceTimer += Time.deltaTime;
             if (regenCadenceTimer >= regenCadance)

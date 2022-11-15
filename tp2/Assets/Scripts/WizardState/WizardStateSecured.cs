@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class WizardStateSecured : WizardState
 {
-    private int bunkeredHealthRegenRatio = 3;
-    void Start()
-    {
-
-    }
+    private int bunkeredHealthRegenRatio = 4;
 
     public override void Init()
     {
@@ -22,15 +18,13 @@ public class WizardStateSecured : WizardState
 
     public override void ManageStateChange()
     {
-        if (manager.getNbLives() >= WizardManager.maxNbLives)
+        if (manager.GetNbLives() >= WizardManager.maxNbLives)
         {
-            Debug.Log("Un-Bunkered");
             manager.ChangeState(WizardManager.WizardStateToSwitch.Normal);
         }
-        else if (alerted)
+        else if (!manager.IsInTower())
         {
-            alerted = false;
-            //manager.ChangeState(WizardManager.WizardStateToSwitch.LastStand);
+            manager.ChangeState(WizardManager.WizardStateToSwitch.Normal);
         }
     }
 
@@ -42,7 +36,7 @@ public class WizardStateSecured : WizardState
     public override void Regenerate()
     {
         regenCadenceTimer += Time.deltaTime;
-        if (manager.getNbLives() < WizardManager.maxNbLives)
+        if (manager.GetNbLives() < WizardManager.maxNbLives)
         {
 
             if (regenCadenceTimer >= regenCadance)

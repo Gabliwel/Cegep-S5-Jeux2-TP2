@@ -5,7 +5,7 @@ using UnityEngine;
 public class LineController : MonoBehaviour
 {
     private LineRenderer line;
-    private Collider2D collider;
+    private new Collider2D collider;
     private WizardManager wizard;
  
     private const float activeTime = 0.2f;

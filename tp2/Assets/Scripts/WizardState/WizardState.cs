@@ -18,7 +18,7 @@ public abstract class WizardState : MonoBehaviour
     protected float regenCadenceTimer = 0;
     public const float normalRegen = 3f;
 
-    private const float cadenceShoot = 0.25f;
+    protected float cadenceShoot = 0.40f;
     private float cadenceTimerShoot = 0;
     protected bool canShoot = true;
     protected bool alerted = false;
@@ -65,7 +65,6 @@ public abstract class WizardState : MonoBehaviour
     // Autre
     public void SearchNewTarget()
     {
-        Debug.Log("searchiiiiiiiiiiiiing");
         if (manager.GetPossibleTargets().Count <= 0)
         {
             target = manager.GetRandomActiveEnemyTower();

@@ -12,12 +12,12 @@ public class WizardStateHide : WizardState
         
         regen = normalRegen;
         regenCadenceTimer = 0f;
+        cadenceShoot = 0.25f;
         speed = 0f;
     }
 
     public override void Init()
     {
-        //  A wizard does not get initialized as hidden.
     }
 
     public override void Attack()
@@ -45,12 +45,12 @@ public class WizardStateHide : WizardState
 
     public override void ManageStateChange()
     {
-        if (manager.getNbLives() > exitBushFightingHpLimit && isAttacking)
+        if (manager.GetNbLives() > exitBushFightingHpLimit && isAttacking)
         {
             manager.ChangeState(WizardManager.WizardStateToSwitch.Normal);
             target = manager.GetRandomActiveEnemyTower();
         }
-        else if(manager.getNbLives() >= WizardManager.maxNbLives)
+        else if(manager.GetNbLives() >= WizardManager.maxNbLives)
         {
             manager.ChangeState(WizardManager.WizardStateToSwitch.Normal);
         }
@@ -64,7 +64,7 @@ public class WizardStateHide : WizardState
     public override void Regenerate()
     {
         regenCadenceTimer += Time.deltaTime;
-        if (!isAttacking && manager.getNbLives() < WizardManager.maxNbLives)
+        if (!isAttacking && manager.GetNbLives() < WizardManager.maxNbLives)
         {
             
             if (regenCadenceTimer >= regenCadance)
@@ -73,7 +73,7 @@ public class WizardStateHide : WizardState
                 manager.AddRegenLives(hiddenHealthRegenRatio * regen);
             }
         }
-        else if(manager.getNbLives() < WizardManager.maxNbLives)
+        else if(manager.GetNbLives() < WizardManager.maxNbLives)
         {
             regenCadenceTimer = 0;
             manager.AddRegenLives(regen);

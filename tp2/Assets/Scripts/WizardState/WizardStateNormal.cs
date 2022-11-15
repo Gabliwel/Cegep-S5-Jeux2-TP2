@@ -9,11 +9,14 @@ public class WizardStateNormal : WizardState
         Init();
         speed = 1f;
         regen = normalRegen;
+        cadenceShoot = 0.40f;
     }
 
     public override void Init()
     {
         target = manager.GetRandomActiveEnemyTower();
+        speed = 1f;
+        regen = normalRegen;
     }
 
     public override void MoveWizard()
@@ -59,7 +62,7 @@ public class WizardStateNormal : WizardState
 
     public override void ManageStateChange()
     {
-        if(manager.getNbLives() < WizardManager.maxNbLives / 4)
+        if(manager.GetNbLives() < WizardManager.maxNbLives / 4)
         {
             manager.ChangeState(WizardManager.WizardStateToSwitch.RunAway);
         } 
@@ -71,7 +74,7 @@ public class WizardStateNormal : WizardState
 
     public override void Regenerate()
     {
-        if (!isAttacking && manager.getNbLives() < WizardManager.maxNbLives)
+        if (!isAttacking && manager.GetNbLives() < WizardManager.maxNbLives)
         {
             regenCadenceTimer += Time.deltaTime;
             if (regenCadenceTimer >= regenCadance)
