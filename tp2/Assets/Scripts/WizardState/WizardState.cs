@@ -71,21 +71,38 @@ public abstract class WizardState : MonoBehaviour
         }
         else
         {
-            GameObject closestTraget = null;
+            GameObject closestTarget = null;
             float smallerDistance = Mathf.Infinity;
 
             foreach (GameObject possibleTarget in manager.GetPossibleTargets())
             {
+
                 float distance = Vector2.Distance(transform.position, possibleTarget.transform.position);
 
                 if (distance < smallerDistance)
                 {
-                    smallerDistance = distance;
-                    closestTraget = possibleTarget;
+                    if (possibleTarget.tag.EndsWith("Wizard"))
+                    {
+                        if (possibleTarget.GetComponent<WizardManager>().GetWizardState() != WizardManager.WizardStateToSwitch.Secured)
+                        {
+                            smallerDistance = distance;
+                            closestTarget = possibleTarget;
+                        }
+                    }
+                    else
+                    {
+                        smallerDistance = distance;
+                        closestTarget = possibleTarget;
+                    }
+                    
                 }
             }
+            if (closestTarget == null)
+            {
+                closestTarget = manager.GetClosestEnemyTower();
+            }
 
-            target = closestTraget;
+            target = closestTarget;
         }
     }
 

@@ -133,7 +133,7 @@ public class WizardManager : MonoBehaviour
         else if (collision.gameObject.tag.EndsWith("Tower"))
         {
             tower = collision.gameObject;
-            sprite.color = new Color(255,255,255);
+            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 0.65f);
         }
     }
 
@@ -146,7 +146,7 @@ public class WizardManager : MonoBehaviour
         }
         else if (collision.gameObject.tag.EndsWith("Tower"))
         {
-            tower = collision.gameObject;
+            tower = null;
             sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 1f);
         }
     }
@@ -159,11 +159,6 @@ public class WizardManager : MonoBehaviour
             possibleTargets.Add(collision.gameObject);
 
             state.ManageEnemyEnter(collision.gameObject);
-
-            /*if (target.tag.EndsWith("Tower"))
-            {
-                target = collision.gameObject;
-            }*/
         }
         else if (collision.gameObject.CompareTag("Forest") && !collision.isTrigger)
         {
@@ -180,11 +175,6 @@ public class WizardManager : MonoBehaviour
 
             state.ManageEnemyExit(collision.gameObject);
 
-            /*if (collision.gameObject == target)
-            {
-                isAttacking = false;
-                SearchNewTarget();
-            }*/
         }
         else if (collision.gameObject.CompareTag("Forest") && !collision.isTrigger)
         {

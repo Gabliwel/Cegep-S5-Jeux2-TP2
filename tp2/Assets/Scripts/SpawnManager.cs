@@ -46,7 +46,7 @@ public class SpawnManager : MonoBehaviour
         //For each broken tower reduce spawn interval as a comeback factor
         if (currentTimer >= SPAWN_INTERVAL - (DEAD_TOWER_ACCELERATION * (towers.Length - towersRemaining)))
         {
-            int randomSpawner = Random.Range(0, towers.Length);
+            int randomSpawner = Random.Range(0, towersRemaining);
             for (int i = 0; i < MAX_WIZARDS; i++)
             {
                 if (!wizards[i].activeSelf)
@@ -55,7 +55,7 @@ public class SpawnManager : MonoBehaviour
 
                     if (temp.Count > 0)
                     {
-                        wizards[i].transform.position = towers[randomSpawner].transform.position;
+                        wizards[i].transform.position = temp[randomSpawner].transform.position;
                         wizards[i].SetActive(true);
                         wizards[i].GetComponent<WizardManager>().Init();
                         currentTimer = 0;

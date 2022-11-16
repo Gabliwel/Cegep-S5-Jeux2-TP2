@@ -6,6 +6,11 @@ public class WizardStateSecured : WizardState
 {
     private int bunkeredHealthRegenRatio = 4;
 
+    void Start()
+    {
+        regen = normalRegen;
+    }
+
     public override void Init()
     {
         // A wizard does not spawn as secured

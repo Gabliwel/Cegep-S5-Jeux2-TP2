@@ -66,7 +66,7 @@ public class WizardStateNormal : WizardState
         {
             manager.ChangeState(WizardManager.WizardStateToSwitch.RunAway);
         } 
-        else if(manager.GetNbKill() >= 3)
+        else if(manager.GetNbKill() >= 1)
         {
             manager.ChangeState(WizardManager.WizardStateToSwitch.Intrepid);
         }
