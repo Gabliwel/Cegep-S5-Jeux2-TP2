@@ -1,5 +1,5 @@
 ## Illustration de State Machine via Unity
-Note final: 97
+Note final: 97%
 
 ## Informations
 Contrôles: Aucun
